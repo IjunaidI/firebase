@@ -1,0 +1,31 @@
+
+body,html{
+    height: 100%;
+}
+.center{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+}
+.inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.buttons{
+    margin-top: 10px;
+}
+.register{
+    display: none;
+   
+}
