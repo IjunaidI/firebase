@@ -1,6 +1,27 @@
+
 var database = firebase.database();
 var user = firebase.auth().currentUser;
-var name, email, photoUrl, uid, emailVerified;
+var name, email, photoUrl, uid, emailVerified,userName,placeCity,placeCountry;
+
+
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      document.querySelector(".invis").style.display = 'block';
+      document.querySelector(".invis").innerHTML = user.uid;
+      
+      var ref = firebase.database().ref(`users/${uid}`);
+
+      ref.on("value", function(snapshot) {
+         console.log(snapshot.val());
+      }, function (error) {
+         console.log("Error: " + error.code);
+      });
+    }
+    
+     else {
+        document.querySelector(".invis").style.display = 'none';
+    }
+  });
 
 function signIn(){ 
     var email = document.querySelector("#email").value;
@@ -26,7 +47,33 @@ function signUp(){
 
 
       });
-
+      document.querySelector(".info").style.display = 'flex';
+      document.querySelector(".log").style.display = 'none';
+    }
+  function info(){
+    var userName = document.querySelector("#username").value;
+    var placeCity = document.querySelector("#city").value;
+    var  placeCountry = document.querySelector("#country").value;
+if (user != null) {
+        name = userName;
+        photoUrl = "user.photoURL";
+        emailVerified = "none";
+        uid = user.uid;
+        city = placeCity;
+        country = placeCountry;  
+      }
+      if (user != null) {
+        writeUserData(uid, name, email, photoUrl,city,country);
+      }
+      function writeUserData(userId, name, email, imageUrl,city,country) {
+        firebase.database().ref('users/' + userId).set({
+          username: name,
+          email: email,
+          profile_picture : imageUrl,
+          place1  : city,
+          place2 : country
+        });
+      }
 }
 
 function logOut(){
@@ -36,44 +83,3 @@ firebase.auth().signOut().then(function() {
     window.alert(error)
   });
 }
-function writeUserData(userId, name, email, imageUrl,city,country) {
-  firebase.database().ref('users/' + userId).set({
-    username: name,
-    email: email,
-    profile_picture : imageUrl,
-    place1  : city,
-    place2 : country
-  });
-}
-firebase.auth().onAuthStateChanged(function(user) {
-   
-
-    if (user) {
-      document.querySelector(".invis").style.display = 'block';
-      document.querySelector(".invis").innerHTML = user.uid;
-      if (user != null) {
-        name = "junaid";
-        email = user.email;
-        photoUrl = "user.photoURL";
-        emailVerified = "none";
-        uid = user.uid;
-        city = "karachi";
-        country = "pakistan";  
-      }
-      if (user != null) {
-        writeUserData(uid, name, email, photoUrl,city,country);
-      }
-      var ref = firebase.database().ref(`users/${uid}`);
-
-      ref.on("value", function(snapshot) {
-         console.log(snapshot.val());
-      }, function (error) {
-         console.log("Error: " + error.code);
-      });
-    }
-    
-     else {
-        document.querySelector(".invis").style.display = 'none';
-    }
-  });
- 

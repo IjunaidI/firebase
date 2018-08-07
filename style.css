@@ -25,3 +25,7 @@ body,html{
 .buttons{
     margin-top: 10px;
 }
+.info{
+    display: none;
+   
+}
