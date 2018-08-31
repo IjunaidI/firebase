@@ -1,32 +1,30 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>SignUp Form</title>
+<title>SignIn</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="css/profile.css">
 <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Permanent+Marker" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 </head>
 <body>
 	
 	<div class="main-w3layouts wrapper">
-		<h1>SignUp Form</h1>
+		<h1>LogIn</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top"> 
 				<form onsubmit="return mySubmitFunction()"> 
-					<input class="text" type="text" id="first" name="Username" placeholder="First Name" required="">
-					<input class="text password" type="text" id="last" name="Username" placeholder="Last Name" required="">
-					<input class="text password" type="text" id="username" name="Username" placeholder="Username" required="">					
 					<input class="text email" id="email" type="email" name="email" placeholder="Email" required="">
 					<input class="text" id="password" type="password" name="password" placeholder="Password" required="">
-					<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="">
+					
 					<div class="wthree-text">  
 						<div class="clear"> </div>
 					</div>   
-					<input type="submit"  onclick="signUp()" value="SIGNUP">
+					<input type="submit" onclick="signIn()" value="LOGIN">
 				</form>
-				<p>Already have an Acoount? <a href="signin.html"> Login Now!</a></p>
+				<p>Don't have an Account? <a href="index.html"> Sign Up</a></p>
 			</div>	 
 		</div>	
 	

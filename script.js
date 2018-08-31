@@ -8,23 +8,31 @@ var name, email, photoUrl, uid, emailVerified, userName, placeCity, placeCountry
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     var uid = firebase.auth().currentUser.uid;
-    document.querySelector(".invis").style.display = 'block';
-    document.querySelector(".invis").innerHTML = user.uid;
-    var ref = firebase.database().ref(`users/${uid}`);
-    var uid = firebase.auth().currentUser.uid;
+    var refer = firebase.database().ref().child(`users/${uid}`);
+    refer.on("value", function(snapshot) {
+      document.querySelector("body").innerHTML = 
+      `<div class="container">
+          <div class="sub-container">
+              <p class="hello">Hello</p>
+              <p class="full-name name-style">${snapshot.val().firstName} ${snapshot.val().lastName}</p>
+        <p class="name-style">Username:${snapshot.val().userName}<span class="name"></span></p>     
+              <button class="logout-button" onclick="logOut()">Log Out</button>        
+          </div>
+      </div>`
+    })
+    
 
     
   }
 
   else {
-    document.querySelector(".invis").style.display = 'none';
+   
   }
 });
 
 function signIn() {
   var email = document.querySelector("#email").value;
   var password = document.querySelector("#password").value;
-
   firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -36,13 +44,17 @@ function signIn() {
 function signUp() {
   var email = document.querySelector("#email").value;
   var password = document.querySelector("#password").value;
-  let userCity = document.querySelector("#city").value;
-
+  let username = document.querySelector("#username").value;
+  let first = document.querySelector("#first").value;
+  let last = document.querySelector("#last").value;
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(rs => {
       console.log(rs.user.uid);
-      firebase.database().ref().child('accounts').child(rs.user.uid).set({
-        city: userCity
+      firebase.database().ref(`users/${rs.user.uid}`).set({
+        userName: username,
+        firstName: first,
+        lastName: last
+
       })
     })
     .catch(function (error) {
@@ -52,8 +64,7 @@ function signUp() {
       window.alert(errorMessage)
 
     });
-  document.querySelector(".info").style.display = 'flex';
-  document.querySelector(".log").style.display = 'none';
+  
 }
 //   function info(){
 
@@ -62,7 +73,11 @@ function signUp() {
 function logOut() {
   firebase.auth().signOut().then(function () {
     alert("signed out")
+    window.location.href = "index.html"
   }).catch(function (error) {
     window.alert(error)
   });
 }
+function mySubmitFunction(){
+  return false;
+ }

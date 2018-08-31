@@ -1,0 +1,46 @@
+body{
+    height: 100vh;
+    margin: 0;
+    background: #673AB7;
+	background-image: linear-gradient(to right top, #051937, #133a62, #1b5f8f, #1c87bd, #12b2eb);
+	background-size:cover;
+	background-attachment: fixed; 
+}
+.container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fjalla One', sans-serif;
+    text-align: center;
+}
+.sub-container{
+    border: 2px dashed white;
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.sub-container>*{
+    margin: 10px;
+    color: white;
+}
+.name-style{
+    font-size: 40px;
+    
+}
+.hello{
+    font-size: 50px;
+    font-family: 'Permanent Marker', cursive;
+}
+.logout-button{
+    height: 38px;
+    width: 150px;
+    font-weight: bold;
+    border: none;
+    background-color: tomato;
+    border-radius: 20px;
+    
+}
